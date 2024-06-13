@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { Props } from "."
 
-type StyleProps = Omit<Props, 'counter' | 'status'>
+type StyleProps = Omit<Props, 'counter' | 'priority'>
 
 export const Card = styled.div<StyleProps>`
   padding: 8px;
