@@ -3,13 +3,13 @@ import * as S from './styles'
 export type Props = {
   active?: boolean
   counter: number
-  status: string
+  priority: string
 }
 
-const CardFilter = ({ active, counter, status}: Props) => (
+const CardFilter = ({ active, counter, priority}: Props) => (
   <S.Card active={active}>
     <S.Counter>{counter}</S.Counter>
-    <S.Label>{status}</S.Label>
+    <S.Label>{priority}</S.Label>
   </S.Card>
 )
 
