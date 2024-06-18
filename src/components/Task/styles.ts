@@ -3,20 +3,20 @@ import variables from '../../styles/variables'
 import * as enums from '../../utils/enums/Task'
 
 type TagProps = {
-  priority?: enums.Priority
-  status?: enums.Status
-  params: 'status' | 'priority'
+  $priority?: enums.Priority
+  $status?: enums.Status
+  $params: 'status' | 'priority'
 }
 
 function tagBackgroundColor(props: TagProps): string {
-  if (props.params === 'status') {
-    if (props.status === enums.Status.PENDING) return variables.lightYellow
-    if (props.status === enums.Status.DONE) return variables.green
+  if (props.$params === 'status') {
+    if (props.$status === enums.Status.PENDING) return variables.lightYellow
+    if (props.$status === enums.Status.DONE) return variables.green
   } else {
-    if (props.priority === enums.Priority.URGENT) return variables.red
-    if (props.priority === enums.Priority.IMPORTANT) return variables.darkYellow
+    if (props.$priority === enums.Priority.URGENT) return variables.red
+    if (props.$priority === enums.Priority.IMPORTANT) return variables.darkYellow
   }
-  return variables.grey
+  return variables.lightBlue
 }
 
 export const Card = styled.div`

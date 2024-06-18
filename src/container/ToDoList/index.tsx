@@ -1,39 +1,73 @@
+import { useSelector } from 'react-redux'
 import Task from '../../components/Task'
-import { Container } from './styles'
-import * as enums from '../../utils/enums/Task'
+import { Container, Result } from './styles'
+import { RootReducer } from '../../store'
+import filter from '../../store/reducers/filter'
 
-const tasks = [
-  {
-    title: 'Estudar',
-    description: 'Estudar Redux',
-    priority: enums.Priority.IMPORTANT,
-    status: enums.Status.PENDING
-  },
-  {
-    title: 'Pagar boleto',
-    description: 'Baixar boleto',
-    priority: enums.Priority.URGENT,
-    status: enums.Status.DONE
-  },
-  {
-    title: 'Ir para academia',
-    description: 'Treino em duplas',
-    priority: enums.Priority.NORMAL,
-    status: enums.Status.PENDING
-  },
-]
+const ToDoList = () => {
+  const { itens } = useSelector((state: RootReducer) => state.tasks)
+  const { searchTerm, criteria, value} = useSelector((state: RootReducer) => state.filter)
 
-const ToDoList = () => (
-  <Container>
-    <p>2 tarefas marcadas com: "categoria" e "termo"1</p>
-    <ul>
-      {tasks.map((element, index) => (
-        <li key={index}>
-          <Task title={element.title} description={element.description} priority={element.priority} status={element.status} />
-        </li>
-      ))}
-    </ul>
-  </Container>
-)
+  const filterTasks = () => {
+    let filteredTasks = itens
+
+    if (searchTerm === undefined) return itens
+
+    filteredTasks = filteredTasks.filter((item) => item.title.toLocaleLowerCase().search(searchTerm.toLocaleLowerCase()) >= 0)
+
+    if (criteria === 'priority') {
+      filteredTasks = filteredTasks.filter(
+        (item) => item.priority === value
+      )
+    } else if (criteria === 'status') {
+      filteredTasks = filteredTasks.filter(
+        (item) => item.status === value
+      )
+    }
+
+    return filteredTasks
+  }
+
+  const showFilterResult = (quantity: number) => {
+    let message = ''
+
+    const criteriaPt = criteria === 'all'? 'todas' :
+      criteria === 'priority' ? 'prioridade' : 'status'
+
+    const complementMsg = searchTerm !== undefined && searchTerm.length > 0? `e "${searchTerm}"` : ''
+
+    if (criteria === 'all') {
+      message = quantity == 1? `${quantity} tarefa encontrada como: todas ${complementMsg}` : `${quantity} tarefas encontradas como: todas ${complementMsg}`
+    } else {
+      message = quantity == 1? `${quantity} tarefa encontra como: "${`${criteriaPt}=${value}`}" ${complementMsg}` : `${quantity} tarefas encontras como: "${`${criteriaPt}=${value}`}" ${complementMsg}`
+
+    }
+
+    return message
+  }
+
+  const tasks = filterTasks()
+  const message = showFilterResult(tasks.length)
+
+  return (
+    <Container>
+      <Result>
+        {message}
+      </Result>
+      <ul>
+        {tasks.map((element, index) => (
+          <li key={index}>
+            <Task
+              title={element.title} description={element.description}
+              status={element.status}
+              id={element.id}
+              priority={element.priority}
+            />
+          </li>
+        ))}
+      </ul>
+    </Container>
+  )
+}
 
 export default ToDoList
