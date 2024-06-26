@@ -1,4 +1,3 @@
-
 import * as enums from '../utils/enums/Task'
 
 class Task {
@@ -10,13 +9,13 @@ class Task {
 
   constructor(
     title: string,
-    prioity: enums.Priority,
+    priority: enums.Priority,
     status: enums.Status,
     description: string,
     id: number
   ) {
     this.title = title
-    this.priority = prioity
+    this.priority = priority
     this.status = status
     this.description = description
     this.id = id
