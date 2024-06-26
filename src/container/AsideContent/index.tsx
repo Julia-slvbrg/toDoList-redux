@@ -4,6 +4,7 @@ import * as S from './styles'
 import { RootReducer } from "../../store"
 import { changeSearchTerm } from "../../store/reducers/filter"
 import * as enums from '../../utils/enums/Task'
+import { Input } from "../../styles"
 
 const AsideContent = () =>{
   const dispatch = useDispatch()
@@ -12,7 +13,7 @@ const AsideContent = () =>{
   return (
     <S.Aside>
       <div>
-        <S.Input
+        <Input
           type="text"
           placeholder="Buscar"
           value={searchTerm}

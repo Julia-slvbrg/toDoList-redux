@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import * as S from './styles'
 import { edit, remove } from '../../store/reducers/tasks'
 import TaskClass from '../../models/Task'
+import { SaveBtn } from '../../styles'
 
 type Props = TaskClass
 
@@ -51,7 +52,7 @@ const Task = ({
       <S.ActionsField>
         {isEditing? (
           <>
-            <S.SaveBtn
+            <SaveBtn
               onClick={() => {
                 dispatch(
                   edit({
@@ -65,7 +66,7 @@ const Task = ({
                 setIsEditing(false)
               }
               }
-            >Salvar</S.SaveBtn>
+            >Salvar</SaveBtn>
             <S.RemoveCancelBtn onClick={() => cancelEdit()}>Cancelar</S.RemoveCancelBtn>
           </>
         ) : (

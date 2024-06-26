@@ -70,9 +70,6 @@ export const Btn = styled.button`
   margin-right: 8px;
   cursor: pointer;
 `
-export const SaveBtn = styled(Btn)`
-  background-color: ${variables.green};
-`
 export const EditBtn = styled(Btn)`
   background-color: ${variables.grey};
 `

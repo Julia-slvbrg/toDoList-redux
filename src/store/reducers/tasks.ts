@@ -21,7 +21,6 @@ const initialState: TasksState = {
       status: enums.Status.DONE,
       description: 'Estudar variáveis',
       id: 2
-
     },
     {
       title: 'Estudar React',
@@ -29,7 +28,6 @@ const initialState: TasksState = {
       status: enums.Status.DONE,
       description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
       id: 3
-
     },
     {
       title: 'Estudar Redux',
@@ -56,9 +54,16 @@ const tasksSlice = createSlice({
       if (taskIndex >= 0) {
         state.itens[taskIndex] = action.payload
       }
+    },
+    add: (state, action: PayloadAction<Task>) => {
+      const taskExists = state.itens.find((task) => task.title.toLocaleLowerCase() === action.payload.title.toLocaleLowerCase())
+
+      if (taskExists) return alert("Já existe uma tarefa com esse nome")
+
+      state.itens.push(action.payload)
     }
   }
 })
 
-export const { remove, edit } = tasksSlice.actions
+export const { remove, edit, add } = tasksSlice.actions
 export default tasksSlice.reducer
