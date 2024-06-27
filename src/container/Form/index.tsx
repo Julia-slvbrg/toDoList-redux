@@ -22,7 +22,7 @@ const Form = () => {
       priority,
       enums.Status.PENDING,
       description,
-      9
+      1
     )
     const taskObj = {...newTask}
 
