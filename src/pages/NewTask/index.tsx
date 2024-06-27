@@ -4,7 +4,7 @@ import Form from '../../container/Form'
 const NewTask = () => {
   return(
     <>
-      <AsideContent />
+      <AsideContent showFilter={false}/>
       <Form />
     </>
   )
